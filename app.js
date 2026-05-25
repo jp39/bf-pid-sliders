@@ -89,7 +89,7 @@ function buildSlider(parent, def, bucket) {
   range.type = "range";
   range.min = def.min;
   range.max = def.max;
-  range.step = 1;
+  range.step = 5;
   range.value = state[bucket][def.key];
   range.setAttribute("aria-label", def.label);
 
@@ -98,13 +98,14 @@ function buildSlider(parent, def, bucket) {
   number.type = "number";
   number.min = multiplierLabel(def.min);
   number.max = multiplierLabel(def.max);
-  number.step = 0.1;
+  number.step = 0.05;
   number.value = multiplierLabel(state[bucket][def.key]);
   number.setAttribute("aria-label", `${def.label} value`);
 
   const update = (rawValue, fromNumber = false) => {
     const parsed = Number(rawValue) || 0;
-    const value = constrain(fromNumber ? Math.round(parsed * 100) : parsed, def.min, def.max);
+    const nextValue = fromNumber ? Math.round(parsed * 20) * 5 : Math.round(parsed / 5) * 5;
+    const value = constrain(nextValue, def.min, def.max);
     state[bucket][def.key] = value;
     range.value = value;
     number.value = multiplierLabel(value);
