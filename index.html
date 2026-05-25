@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Betaflight PID Slider Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Betaflight PID Slider Simulator</h1>
+          <p>Models the simplified tuning calculations from the local Betaflight source tree.</p>
+        </div>
+        <div class="actions">
+          <button id="resetButton" type="button" title="Reset sliders to Betaflight defaults">Reset</button>
+          <button id="copyButton" type="button" title="Copy CLI settings">Copy CLI</button>
+        </div>
+      </header>
+
+      <section class="layout">
+        <aside class="controls" aria-label="Simplified tuning controls">
+          <div class="group">
+            <div class="group-title">
+              <h2>PID Mode</h2>
+              <span id="modeHint">Roll, pitch, yaw</span>
+            </div>
+            <div class="segmented" role="radiogroup" aria-label="PID tuning mode">
+              <label><input type="radio" name="pidMode" value="0"><span>Off</span></label>
+              <label><input type="radio" name="pidMode" value="1"><span>Roll/Pitch</span></label>
+              <label><input type="radio" name="pidMode" value="2" checked><span>RPY</span></label>
+            </div>
+          </div>
+
+          <div class="group" id="sliderPanel"></div>
+
+          <div class="group">
+            <div class="group-title">
+              <h2>Filter Sliders</h2>
+              <span>0.1-2.0</span>
+            </div>
+            <label class="toggle">
+              <input id="gyroFilterEnabled" type="checkbox" checked>
+              <span>Gyro filter slider enabled</span>
+            </label>
+            <label class="toggle">
+              <input id="dtermFilterEnabled" type="checkbox" checked>
+              <span>D-term filter slider enabled</span>
+            </label>
+            <div id="filterPanel"></div>
+          </div>
+        </aside>
+
+        <section class="results" aria-label="Calculated tuning values">
+          <div class="result-head">
+            <div>
+              <h2>Calculated Values</h2>
+              <p>Equivalent values after `applySimplifiedTuning()`.</p>
+            </div>
+            <div class="badge" id="sourceBadge">BF defaults</div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Axis</th>
+                  <th>P</th>
+                  <th>I</th>
+                  <th>D</th>
+                  <th>D Max</th>
+                  <th>FF</th>
+                </tr>
+              </thead>
+              <tbody id="pidTable"></tbody>
+            </table>
+          </div>
+
+          <div class="cards">
+            <section class="mini-card">
+              <h3>D-term Filters</h3>
+              <dl id="dtermFilters"></dl>
+            </section>
+            <section class="mini-card">
+              <h3>Gyro Filters</h3>
+              <dl id="gyroFilters"></dl>
+            </section>
+          </div>
+
+          <section class="cli-block">
+            <div class="cli-head">
+              <h3>CLI Diff</h3>
+              <span id="copyStatus" aria-live="polite"></span>
+            </div>
+            <pre id="cliOutput"></pre>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

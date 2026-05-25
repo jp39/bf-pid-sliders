@@ -1,0 +1,412 @@
+:root {
+  color-scheme: dark;
+  --bg: #101114;
+  --panel: #181a20;
+  --panel-2: #20232b;
+  --line: #343844;
+  --text: #f2f4f8;
+  --muted: #aab1bf;
+  --accent: #23c7a7;
+  --accent-2: #f2b84b;
+  --danger: #ff6b6b;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.shell {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0 24px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.topbar p,
+.result-head p {
+  margin-top: 8px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+}
+
+button {
+  min-height: 40px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 14px;
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(330px, 440px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.controls,
+.results {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.controls {
+  padding: 18px;
+}
+
+.results {
+  min-width: 0;
+  padding: 20px;
+}
+
+.group + .group {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.group-title,
+.result-head,
+.cli-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.topbar > *,
+.group-title > *,
+.result-head > *,
+.cli-head > * {
+  min-width: 0;
+}
+
+.group-title h2,
+.result-head h2 {
+  font-size: 1rem;
+}
+
+.group-title span,
+.badge,
+.cli-head span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.segmented label {
+  min-width: 0;
+}
+
+.segmented input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented span {
+  display: grid;
+  min-height: 38px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 8px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.segmented input:checked + span {
+  border-color: var(--accent);
+  background: rgba(35, 199, 167, 0.14);
+  color: var(--text);
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 0;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.slider-label strong {
+  color: var(--text);
+  font-weight: 650;
+}
+
+input[type="range"] {
+  width: 100%;
+  min-width: 0;
+  accent-color: var(--accent);
+}
+
+.number-input {
+  width: 64px;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-2);
+  color: var(--text);
+  text-align: center;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  color: var(--muted);
+}
+
+.toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+td {
+  font-variant-numeric: tabular-nums;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+.changed {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+.inactive {
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.mini-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  padding: 16px;
+}
+
+.mini-card h3,
+.cli-block h3 {
+  font-size: 0.96rem;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 14px;
+  margin: 12px 0 0;
+}
+
+dt {
+  color: var(--muted);
+}
+
+dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.cli-block {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0b0c0f;
+  padding: 16px;
+}
+
+pre {
+  min-height: 180px;
+  max-height: 360px;
+  overflow: auto;
+  margin: 0;
+  color: #dce2ea;
+  font: 0.9rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 940px) {
+  .shell {
+    padding: 16px;
+  }
+
+  .topbar,
+  .layout,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    display: grid;
+    justify-content: stretch;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .results {
+    margin-top: 20px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .controls,
+  .results {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .segmented {
+    grid-template-columns: 1fr;
+  }
+
+  .group-title,
+  .result-head {
+    display: grid;
+  }
+
+  .group-title span,
+  .badge {
+    white-space: normal;
+  }
+
+  .slider-row {
+    grid-template-columns: 1fr;
+  }
+
+  .slider-row > div {
+    min-width: 0;
+  }
+
+  .number-input {
+    width: 100%;
+  }
+}
