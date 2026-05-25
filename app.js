@@ -73,7 +73,7 @@ function percent(value) {
 }
 
 function multiplierLabel(value) {
-  return (value / 100).toFixed(1);
+  return (value / 100).toFixed(2);
 }
 
 function buildSlider(parent, def, bucket) {
@@ -123,7 +123,7 @@ function buildSlider(parent, def, bucket) {
 function buildControls() {
   const title = document.createElement("div");
   title.className = "group-title";
-  title.innerHTML = "<h2>PID Sliders</h2><span>0.0-2.0</span>";
+  title.innerHTML = "<h2>PID Sliders</h2><span>0.00-2.00</span>";
   sliderPanel.append(title);
   sliderDefs.forEach((def) => buildSlider(sliderPanel, def, "sliders"));
   filterSliderDefs.forEach((def) => buildSlider(filterPanel, def, "filterSliders"));
